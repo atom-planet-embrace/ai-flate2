@@ -592,7 +592,7 @@ impl From<DecompressError> for crate::io::Error {
     fn from(_data: DecompressError) -> crate::io::Error {
         #[cfg(feature = "std")]
         {
-            crate::io::Error::new(crate::io::ErrorKind::Other, _data)
+            crate::io::Error::other(_data)
         }
         #[cfg(not(feature = "std"))]
         {
@@ -627,7 +627,7 @@ impl From<CompressError> for crate::io::Error {
     fn from(_data: CompressError) -> crate::io::Error {
         #[cfg(feature = "std")]
         {
-            crate::io::Error::new(crate::io::ErrorKind::Other, _data)
+            crate::io::Error::other(_data)
         }
         #[cfg(not(feature = "std"))]
         {
