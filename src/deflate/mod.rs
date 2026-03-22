@@ -2,7 +2,7 @@ pub mod bufread;
 pub mod read;
 pub mod write;
 
-#[cfg(test)]
+#[cfg(all(test, feature = "std"))]
 mod tests {
     use std::io::prelude::*;
 

@@ -1,7 +1,9 @@
-use std::cmp;
-use std::io;
-use std::io::prelude::*;
-use std::mem;
+use alloc::vec::Vec;
+use core::cmp;
+use core::mem;
+
+use crate::io;
+use crate::io::prelude::*;
 
 use super::{corrupt, read_into, GzBuilder, GzHeader, GzHeaderParser};
 use crate::crc::CrcReader;
@@ -25,7 +27,8 @@ fn copy(into: &mut [u8], from: &[u8], pos: &mut usize) -> usize {
 ///
 /// # Examples
 ///
-/// ```
+#[cfg_attr(not(feature = "std"), doc = "```ignore")]
+#[cfg_attr(feature = "std", doc = "```")]
 /// use std::io::prelude::*;
 /// use std::io;
 /// use flate2::Compression;
@@ -182,7 +185,8 @@ impl<R: BufRead + Write> Write for GzEncoder<R> {
 ///
 /// # Examples
 ///
-/// ```
+#[cfg_attr(not(feature = "std"), doc = "```ignore")]
+#[cfg_attr(feature = "std", doc = "```")]
 /// use std::io::prelude::*;
 /// use std::io;
 /// # use flate2::Compression;
@@ -385,7 +389,8 @@ impl<R: BufRead + Write> Write for GzDecoder<R> {
 ///
 /// # Examples
 ///
-/// ```
+#[cfg_attr(not(feature = "std"), doc = "```ignore")]
+#[cfg_attr(feature = "std", doc = "```")]
 /// use std::io::prelude::*;
 /// use std::io;
 /// # use flate2::Compression;
@@ -452,7 +457,7 @@ impl<R: BufRead> Read for MultiGzDecoder<R> {
     }
 }
 
-#[cfg(test)]
+#[cfg(all(test, feature = "std"))]
 mod test {
     use crate::bufread::GzDecoder;
     use crate::gz::write;

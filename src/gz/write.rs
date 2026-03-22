@@ -1,6 +1,8 @@
-use std::cmp;
-use std::io;
-use std::io::prelude::*;
+use alloc::vec::Vec;
+use core::cmp;
+
+use crate::io;
+use crate::io::prelude::*;
 
 use super::{corrupt, GzBuilder, GzHeader, GzHeaderParser};
 use crate::crc::{Crc, CrcWriter};
@@ -16,7 +18,8 @@ use crate::{Compress, Compression, Decompress, Status};
 ///
 /// # Examples
 ///
-/// ```
+#[cfg_attr(not(feature = "std"), doc = "```ignore")]
+#[cfg_attr(feature = "std", doc = "```")]
 /// use std::io::prelude::*;
 /// use flate2::Compression;
 /// use flate2::write::GzEncoder;
@@ -184,7 +187,8 @@ impl<W: Write> Drop for GzEncoder<W> {
 ///
 /// # Examples
 ///
-/// ```
+#[cfg_attr(not(feature = "std"), doc = "```ignore")]
+#[cfg_attr(feature = "std", doc = "```")]
 /// use std::io::prelude::*;
 /// use std::io;
 /// use flate2::Compression;
@@ -464,7 +468,7 @@ impl<W: Write> Write for MultiGzDecoder<W> {
     }
 }
 
-#[cfg(test)]
+#[cfg(all(test, feature = "std"))]
 mod tests {
     use super::*;
 

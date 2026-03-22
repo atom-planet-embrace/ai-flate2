@@ -1,7 +1,7 @@
 //! Simple CRC bindings backed by miniz.c
 
-use std::io;
-use std::io::prelude::*;
+use crate::io;
+use crate::io::prelude::*;
 
 /// The CRC calculated by a [`CrcReader`].
 #[derive(Debug, Default)]
@@ -252,7 +252,7 @@ impl<W: Write> Write for CrcWriter<W> {
     }
 }
 
-#[cfg(test)]
+#[cfg(all(test, feature = "std"))]
 mod tests {
     use super::Crc;
 

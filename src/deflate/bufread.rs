@@ -1,6 +1,7 @@
-use std::io;
-use std::io::prelude::*;
-use std::mem;
+use core::mem;
+
+use crate::io;
+use crate::io::prelude::*;
 
 use crate::zio;
 use crate::{Compress, Decompress};
@@ -15,7 +16,8 @@ use crate::{Compress, Decompress};
 ///
 /// # Examples
 ///
-/// ```
+#[cfg_attr(not(feature = "std"), doc = "```ignore")]
+#[cfg_attr(feature = "std", doc = "```")]
 /// use std::io::prelude::*;
 /// use std::io;
 /// use flate2::Compression;
@@ -137,7 +139,8 @@ impl<W: BufRead + Write> Write for DeflateEncoder<W> {
 ///
 /// # Examples
 ///
-/// ```
+#[cfg_attr(not(feature = "std"), doc = "```ignore")]
+#[cfg_attr(feature = "std", doc = "```")]
 /// use std::io::prelude::*;
 /// use std::io;
 /// # use flate2::Compression;
@@ -249,7 +252,7 @@ impl<W: BufRead + Write> Write for DeflateDecoder<W> {
     }
 }
 
-#[cfg(test)]
+#[cfg(all(test, feature = "std"))]
 mod test {
     use crate::bufread::DeflateDecoder;
     use crate::deflate::write;

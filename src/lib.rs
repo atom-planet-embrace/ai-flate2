@@ -68,7 +68,7 @@
 //! The [`mod@write`] implementations are most useful when there is no way to create a `BufRead`
 //! type, notably when reading async iterators (streams).
 //!
-//! ```
+//! ```ignore
 //! use futures::{Stream, StreamExt};
 //! use std::io::{Result, Write as _};
 //!
@@ -115,6 +115,7 @@
 //! [`Write`]: std::io::Write
 //! [`GzDecoder`]: bufread::GzDecoder
 //! [`MultiGzDecoder`]: bufread::MultiGzDecoder
+#![cfg_attr(not(any(feature = "std", test)), no_std)]
 #![doc(html_root_url = "https://docs.rs/flate2/0.2")]
 #![deny(missing_docs)]
 #![deny(missing_debug_implementations)]
@@ -122,12 +123,18 @@
 #![cfg_attr(test, deny(warnings))]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
+#[cfg(feature = "std")]
+extern crate std;
+
+extern crate alloc;
+
 #[cfg(not(feature = "any_impl",))]
 compile_error!("You need to choose a zlib backend");
 
 pub use crate::crc::{Crc, CrcReader, CrcWriter};
 pub use crate::gz::GzBuilder;
 pub use crate::gz::GzHeader;
+pub use crate::gz::FromUnixTimestamp;
 pub use crate::mem::{Compress, CompressError, Decompress, DecompressError, Status};
 pub use crate::mem::{FlushCompress, FlushDecompress};
 
@@ -136,6 +143,7 @@ mod crc;
 mod deflate;
 mod ffi;
 mod gz;
+mod io;
 mod mem;
 mod zio;
 mod zlib;
@@ -199,12 +207,15 @@ fn _assert_send_sync() {
     _assert_send_sync::<read::GzEncoder<&[u8]>>();
     _assert_send_sync::<read::GzDecoder<&[u8]>>();
     _assert_send_sync::<read::MultiGzDecoder<&[u8]>>();
-    _assert_send_sync::<write::DeflateEncoder<Vec<u8>>>();
-    _assert_send_sync::<write::DeflateDecoder<Vec<u8>>>();
-    _assert_send_sync::<write::ZlibEncoder<Vec<u8>>>();
-    _assert_send_sync::<write::ZlibDecoder<Vec<u8>>>();
-    _assert_send_sync::<write::GzEncoder<Vec<u8>>>();
-    _assert_send_sync::<write::GzDecoder<Vec<u8>>>();
+    #[cfg(feature = "std")]
+    {
+        _assert_send_sync::<write::DeflateEncoder<alloc::vec::Vec<u8>>>();
+        _assert_send_sync::<write::DeflateDecoder<alloc::vec::Vec<u8>>>();
+        _assert_send_sync::<write::ZlibEncoder<alloc::vec::Vec<u8>>>();
+        _assert_send_sync::<write::ZlibDecoder<alloc::vec::Vec<u8>>>();
+        _assert_send_sync::<write::GzEncoder<alloc::vec::Vec<u8>>>();
+        _assert_send_sync::<write::GzDecoder<alloc::vec::Vec<u8>>>();
+    }
 }
 
 /// When compressing data, the compression level can be specified by a value in
@@ -251,10 +262,9 @@ impl Default for Compression {
     }
 }
 
-#[cfg(test)]
+#[cfg(all(test, feature = "std"))]
 fn random_bytes() -> impl Iterator<Item = u8> {
     use rand::Rng;
-    use std::iter;
 
-    iter::repeat(()).map(|_| rand::rng().random())
+    core::iter::repeat(()).map(|_| rand::rng().random())
 }

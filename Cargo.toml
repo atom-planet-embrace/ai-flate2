@@ -5,7 +5,7 @@ version = "1.1.10"
 edition = "2018"
 license = "MIT OR Apache-2.0"
 readme = "README.md"
-rust-version = "1.67.0"
+rust-version = "1.81.0"
 keywords = ["gzip", "deflate", "zlib", "zlib-ng", "encoding"]
 categories = ["compression", "api-bindings"]
 repository = "https://github.com/rust-lang/flate2-rs"
@@ -22,11 +22,12 @@ exclude = [".*"]
 libz-sys = { version = "1.1.20", optional = true, default-features = false }
 libz-ng-sys = { version = "1.1.16", optional = true }
 # this matches the default features, but we don't want to depend on the default features staying the same
-zlib-rs = { version = "0.6.0", optional = true, default-features = false, features = ["std", "rust-allocator"] }
+zlib-rs = { version = "0.6.0", optional = true, default-features = false, features = ["rust-allocator"] }
 ## This implementation uses only safe Rust code and doesn't require a C compiler.
 ## It provides good performance for most use cases while being completely portable.
-miniz_oxide = { version = "0.9.0", optional = true, features = ["simd"] }
-crc32fast = { version = "1.2.0", optional = true }
+miniz_oxide = { version = "0.9.0", optional = true, default-features = false, features = ["with-alloc"] }
+crc32fast = { version = "1.5.0", default-features = false, optional = true }
+no_std_io = { version = "0.6", default-features = false }
 document-features = { version = "0.2", optional = true }
 
 [dev-dependencies]
@@ -38,6 +39,11 @@ quickcheck = { version = "1.0", default-features = false }
 ## The default backend using pure Rust implementation via miniz_oxide.
 ## This provides a safe, portable compression implementation without requiring a C compiler.
 default = ["rust_backend"]
+
+## Enables `std::io` traits. When disabled, uses `no_std_io` for I/O traits.
+std = ["zlib-rs?/std", "crc32fast?/std"]
+
+simd = ["miniz_oxide?/simd", "crc32fast?/std"]
 
 #! ### User-Facing Backend Features
 #! Choose one of these features to select the compression backend.
@@ -62,11 +68,11 @@ miniz_oxide = ["any_impl", "dep:miniz_oxide", "dep:crc32fast"]
 ## Use the system's installed zlib library.
 ## This is useful when you need compatibility with other C code that uses zlib,
 ## or when you want to use the system-provided zlib for consistency.
-zlib = ["any_c_zlib", "libz-sys", "dep:crc32fast"]
+zlib = ["std", "any_c_zlib", "libz-sys", "dep:crc32fast"]
 
 ## Use the system's installed zlib library with default features enabled.
 ## Similar to `zlib` but enables additional features from libz-sys.
-zlib-default = ["any_c_zlib", "libz-sys/default", "dep:crc32fast"]
+zlib-default = ["std", "any_c_zlib", "libz-sys/default", "dep:crc32fast"]
 
 ## Use zlib-ng in zlib-compat mode via libz-sys.
 ## This provides zlib-ng's performance improvements while maintaining compatibility.
@@ -77,12 +83,12 @@ zlib-default = ["any_c_zlib", "libz-sys/default", "dep:crc32fast"]
 ## See [the libz-sys README](https://github.com/rust-lang/libz-sys/blob/main/README.md) for details.
 ## To avoid that, use the `"zlib-ng"` feature instead.
 
-zlib-ng-compat = ["zlib", "libz-sys/zlib-ng", "dep:crc32fast"]
+zlib-ng-compat = ["std", "zlib", "libz-sys/zlib-ng", "dep:crc32fast"]
 
 ## Use the high-performance zlib-ng library directly.
 ## This typically provides better performance than stock zlib and works even when
 ## other dependencies use zlib. Requires a C compiler.
-zlib-ng = ["any_c_zlib", "libz-ng-sys", "dep:crc32fast"]
+zlib-ng = ["std", "any_c_zlib", "libz-ng-sys", "dep:crc32fast"]
 
 ## Cloudflare-zlib is no longer supported.
 ## Falls back to `libz-sys`, but we recommend switching to `zlib-rs` instead.
@@ -110,6 +116,118 @@ any_c_zlib = ["any_zlib"]
 ## This is automatically enabled by all backend features to ensure at least one implementation is available.
 ## Do not enable this feature directly; instead, choose a specific backend feature.
 any_impl = []
+
+[[example]]
+name = "compress_file"
+required-features = ["std"]
+
+[[example]]
+name = "decompress_file"
+required-features = ["std"]
+
+[[example]]
+name = "deflatedecoder-bufread"
+required-features = ["std"]
+
+[[example]]
+name = "deflatedecoder-read"
+required-features = ["std"]
+
+[[example]]
+name = "deflatedecoder-write"
+required-features = ["std"]
+
+[[example]]
+name = "deflateencoder-bufread"
+required-features = ["std"]
+
+[[example]]
+name = "deflateencoder-read"
+required-features = ["std"]
+
+[[example]]
+name = "deflateencoder-write"
+required-features = ["std"]
+
+[[example]]
+name = "gzbuilder"
+required-features = ["std"]
+
+[[example]]
+name = "gzdecoder-bufread"
+required-features = ["std"]
+
+[[example]]
+name = "gzdecoder-read"
+required-features = ["std"]
+
+[[example]]
+name = "gzdecoder-write"
+required-features = ["std"]
+
+[[example]]
+name = "gzencoder-bufread"
+required-features = ["std"]
+
+[[example]]
+name = "gzencoder-read"
+required-features = ["std"]
+
+[[example]]
+name = "gzencoder-write"
+required-features = ["std"]
+
+[[example]]
+name = "gzmultidecoder-bufread"
+required-features = ["std"]
+
+[[example]]
+name = "gzmultidecoder-read"
+required-features = ["std"]
+
+[[example]]
+name = "zlibdecoder-bufread"
+required-features = ["std"]
+
+[[example]]
+name = "zlibdecoder-read"
+required-features = ["std"]
+
+[[example]]
+name = "zlibdecoder-write"
+required-features = ["std"]
+
+[[example]]
+name = "zlibencoder-bufread"
+required-features = ["std"]
+
+[[example]]
+name = "zlibencoder-read"
+required-features = ["std"]
+
+[[example]]
+name = "zlibencoder-write"
+required-features = ["std"]
+
+[[test]]
+name = "early-flush"
+required-features = ["std"]
+
+[[test]]
+name = "empty-read"
+required-features = ["std"]
+
+[[test]]
+name = "gunzip"
+required-features = ["std"]
+
+[[test]]
+name = "zero-write"
+required-features = ["std"]
+
+[[test]]
+name = "capabilities"
+required-features = ["std"]
 
 [package.metadata.docs.rs]
 all-features = true

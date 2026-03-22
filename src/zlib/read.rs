@@ -1,5 +1,8 @@
-use std::io;
-use std::io::prelude::*;
+use alloc::vec;
+use alloc::vec::Vec;
+
+use crate::io;
+use crate::io::prelude::*;
 
 use super::bufread;
 use crate::bufreader::BufReader;
@@ -14,7 +17,8 @@ use crate::Decompress;
 ///
 /// # Examples
 ///
-/// ```
+#[cfg_attr(not(feature = "std"), doc = "```ignore")]
+#[cfg_attr(feature = "std", doc = "```")]
 /// use std::io::prelude::*;
 /// use flate2::Compression;
 /// use flate2::read::ZlibEncoder;
@@ -139,7 +143,8 @@ impl<W: Read + Write> Write for ZlibEncoder<W> {
 ///
 /// # Examples
 ///
-/// ```
+#[cfg_attr(not(feature = "std"), doc = "```ignore")]
+#[cfg_attr(feature = "std", doc = "```")]
 /// use std::io::prelude::*;
 /// use std::io;
 /// # use flate2::Compression;

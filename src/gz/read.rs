@@ -1,5 +1,5 @@
-use std::io;
-use std::io::prelude::*;
+use crate::io;
+use crate::io::prelude::*;
 
 use super::bufread;
 use super::{GzBuilder, GzHeader};
@@ -15,7 +15,8 @@ use crate::Compression;
 ///
 /// # Examples
 ///
-/// ```
+#[cfg_attr(not(feature = "std"), doc = "```ignore")]
+#[cfg_attr(feature = "std", doc = "```")]
 /// use std::io::prelude::*;
 /// use std::io;
 /// use flate2::Compression;
@@ -108,7 +109,8 @@ impl<R: Read + Write> Write for GzEncoder<R> {
 ///
 /// # Examples
 ///
-/// ```
+#[cfg_attr(not(feature = "std"), doc = "```ignore")]
+#[cfg_attr(feature = "std", doc = "```")]
 /// use std::io::prelude::*;
 /// use std::io;
 /// # use flate2::Compression;
@@ -230,7 +232,8 @@ impl<R: Read + Write> Write for GzDecoder<R> {
 ///
 /// # Examples
 ///
-/// ```
+#[cfg_attr(not(feature = "std"), doc = "```ignore")]
+#[cfg_attr(feature = "std", doc = "```")]
 /// use std::io::prelude::*;
 /// use std::io;
 /// # use flate2::Compression;
@@ -311,7 +314,7 @@ impl<R: Read + Write> Write for MultiGzDecoder<R> {
     }
 }
 
-#[cfg(test)]
+#[cfg(all(test, feature = "std"))]
 mod tests {
     use std::io::{Cursor, ErrorKind, Read, Result, Write};
 

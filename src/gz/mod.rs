@@ -1,6 +1,9 @@
-use std::ffi::CString;
-use std::io::{BufRead, Error, ErrorKind, Read, Result, Write};
-use std::time;
+use alloc::boxed::Box;
+use alloc::ffi::CString;
+use alloc::vec;
+use alloc::vec::Vec;
+
+use crate::io::{BufRead, Error, ErrorKind, Read, Result, Write};
 
 use crate::bufreader::BufReader;
 use crate::{Compression, Crc};
@@ -76,14 +79,29 @@ impl GzHeader {
     ///
     /// The time is measured as seconds since 00:00:00 GMT, Jan. 1 1970.
     /// See [`mtime`](#method.mtime) for more detail.
-    pub fn mtime_as_datetime(&self) -> Option<time::SystemTime> {
+    pub fn mtime_as_datetime<T: FromUnixTimestamp>(&self) -> Option<T> {
         if self.mtime == 0 {
             None
         } else {
-            let duration = time::Duration::new(u64::from(self.mtime), 0);
-            let datetime = time::UNIX_EPOCH + duration;
-            Some(datetime)
+            Some(T::from_unix_timestamp(u64::from(self.mtime)))
         }
+    }
+}
+
+/// A trait for types that can be constructed from a Unix timestamp.
+///
+/// This allows `mtime_as_datetime` to work with any datetime type,
+/// not just `std::time::SystemTime`.
+pub trait FromUnixTimestamp {
+    /// Create an instance from the number of seconds since the Unix epoch
+    /// (00:00:00 GMT, Jan. 1, 1970).
+    fn from_unix_timestamp(secs: u64) -> Self;
+}
+
+#[cfg(feature = "std")]
+impl FromUnixTimestamp for std::time::SystemTime {
+    fn from_unix_timestamp(secs: u64) -> Self {
+        std::time::UNIX_EPOCH + std::time::Duration::new(secs, 0)
     }
 }
 
@@ -290,7 +308,8 @@ fn corrupt() -> Error {
 ///
 /// # Examples
 ///
-/// ```
+#[cfg_attr(not(feature = "std"), doc = "```ignore")]
+#[cfg_attr(feature = "std", doc = "```")]
 /// use std::io::prelude::*;
 /// # use std::io;
 /// use std::fs::File;
@@ -438,7 +457,7 @@ impl GzBuilder {
     }
 }
 
-#[cfg(test)]
+#[cfg(all(test, feature = "std"))]
 mod tests {
     use std::io::prelude::*;
 

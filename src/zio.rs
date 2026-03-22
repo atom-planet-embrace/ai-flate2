@@ -1,6 +1,8 @@
-use std::io;
-use std::io::prelude::*;
-use std::mem;
+use alloc::vec::Vec;
+use core::mem;
+
+use crate::io;
+use crate::io::prelude::*;
 
 use crate::{
     Compress, CompressError, Decompress, DecompressError, FlushCompress, FlushDecompress, Status,

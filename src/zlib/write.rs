@@ -1,5 +1,5 @@
-use std::io;
-use std::io::prelude::*;
+use crate::io;
+use crate::io::prelude::*;
 
 use crate::zio;
 use crate::{Compress, Decompress};
@@ -13,7 +13,8 @@ use crate::{Compress, Decompress};
 ///
 /// # Examples
 ///
-/// ```
+#[cfg_attr(not(feature = "std"), doc = "```ignore")]
+#[cfg_attr(feature = "std", doc = "```")]
 /// use std::io::prelude::*;
 /// use flate2::Compression;
 /// use flate2::write::ZlibEncoder;
@@ -188,7 +189,8 @@ impl<W: Read + Write> Read for ZlibEncoder<W> {
 ///
 /// # Examples
 ///
-/// ```
+#[cfg_attr(not(feature = "std"), doc = "```ignore")]
+#[cfg_attr(feature = "std", doc = "```")]
 /// use std::io::prelude::*;
 /// use std::io;
 /// # use flate2::Compression;
@@ -343,7 +345,7 @@ impl<W: Read + Write> Read for ZlibDecoder<W> {
     }
 }
 
-#[cfg(test)]
+#[cfg(all(test, feature = "std"))]
 mod tests {
     use super::*;
     use crate::Compression;
