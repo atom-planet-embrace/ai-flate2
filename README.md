@@ -1,3 +1,5 @@
+This is a fork of the [flate2](https://crates.io/crates/flate2) crate.
+
 # ai-flate2
 
 [![Crates.io](https://img.shields.io/crates/v/ai-flate2.svg?maxAge=2592000)](https://crates.io/crates/ai-flate2)
