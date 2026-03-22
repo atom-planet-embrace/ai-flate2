@@ -16,8 +16,8 @@ use crate::{Compress, Decompress};
 #[cfg_attr(not(feature = "std"), doc = "```ignore")]
 #[cfg_attr(feature = "std", doc = "```")]
 /// use std::io::prelude::*;
-/// use flate2::Compression;
-/// use flate2::write::DeflateEncoder;
+/// use ai_flate2::Compression;
+/// use ai_flate2::write::DeflateEncoder;
 ///
 /// // Vec<u8> implements Write to print the compressed bytes of sample string
 /// # fn main() {
@@ -185,9 +185,9 @@ impl<W: Read + Write> Read for DeflateEncoder<W> {
 #[cfg_attr(feature = "std", doc = "```")]
 /// use std::io::prelude::*;
 /// use std::io;
-/// # use flate2::Compression;
-/// # use flate2::write::DeflateEncoder;
-/// use flate2::write::DeflateDecoder;
+/// # use ai_flate2::Compression;
+/// # use ai_flate2::write::DeflateEncoder;
+/// use ai_flate2::write::DeflateDecoder;
 ///
 /// # fn main() {
 /// #    let mut e = DeflateEncoder::new(Vec::new(), Compression::default());

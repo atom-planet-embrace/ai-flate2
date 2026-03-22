@@ -1,5 +1,5 @@
-use flate2::Compression;
-use flate2::GzBuilder;
+use ai_flate2::Compression;
+use ai_flate2::GzBuilder;
 use std::fs::File;
 use std::io;
 use std::io::prelude::*;

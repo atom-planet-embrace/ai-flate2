@@ -313,8 +313,8 @@ fn corrupt() -> Error {
 /// use std::io::prelude::*;
 /// # use std::io;
 /// use std::fs::File;
-/// use flate2::GzBuilder;
-/// use flate2::Compression;
+/// use ai_flate2::GzBuilder;
+/// use ai_flate2::Compression;
 ///
 /// // GzBuilder opens a file and writes a sample string using GzBuilder pattern
 ///

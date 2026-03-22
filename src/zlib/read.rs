@@ -20,8 +20,8 @@ use crate::Decompress;
 #[cfg_attr(not(feature = "std"), doc = "```ignore")]
 #[cfg_attr(feature = "std", doc = "```")]
 /// use std::io::prelude::*;
-/// use flate2::Compression;
-/// use flate2::read::ZlibEncoder;
+/// use ai_flate2::Compression;
+/// use ai_flate2::read::ZlibEncoder;
 /// use std::fs::File;
 ///
 /// // Open example file and compress the contents using Read interface
@@ -147,9 +147,9 @@ impl<W: Read + Write> Write for ZlibEncoder<W> {
 #[cfg_attr(feature = "std", doc = "```")]
 /// use std::io::prelude::*;
 /// use std::io;
-/// # use flate2::Compression;
-/// # use flate2::write::ZlibEncoder;
-/// use flate2::read::ZlibDecoder;
+/// # use ai_flate2::Compression;
+/// # use ai_flate2::write::ZlibEncoder;
+/// use ai_flate2::read::ZlibDecoder;
 ///
 /// # fn main() {
 /// # let mut e = ZlibEncoder::new(Vec::new(), Compression::default());

@@ -1,5 +1,5 @@
-use flate2::write::GzEncoder;
-use flate2::Compression;
+use ai_flate2::write::GzEncoder;
+use ai_flate2::Compression;
 use std::env::args;
 use std::fs::File;
 use std::io::copy;

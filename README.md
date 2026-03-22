@@ -1,7 +1,7 @@
-# flate2
+# ai-flate2
 
-[![Crates.io](https://img.shields.io/crates/v/flate2.svg?maxAge=2592000)](https://crates.io/crates/flate2)
-[![Documentation](https://docs.rs/flate2/badge.svg)](https://docs.rs/flate2)
+[![Crates.io](https://img.shields.io/crates/v/ai-flate2.svg?maxAge=2592000)](https://crates.io/crates/ai-flate2)
+[![Documentation](https://docs.rs/ai-flate2/badge.svg)](https://docs.rs/ai-flate2)
 
 A streaming compression/decompression library DEFLATE-based streams in Rust.
 
@@ -18,7 +18,7 @@ Supported formats:
 ```toml
 # Cargo.toml
 [dependencies]
-flate2 = "1.0"
+ai-flate2 = "1.0"
 ```
 
 ## MSRV (Minimum Supported Rust Version) Policy
@@ -26,7 +26,7 @@ flate2 = "1.0"
 This crate supports the current and previous stable versions of the Rust compiler.
 For example, if the current stable is 1.80, this crate supports 1.80 and 1.79.
 
-Other compiler versions may work, but failures may not be treated as a `flate2` bug.
+Other compiler versions may work, but failures may not be treated as an `ai-flate2` bug.
 
 The `Cargo.toml` file specifies a `rust-version` for which builds of the current version
 passed at some point. This value is indicative only, and may change at any time.
@@ -40,8 +40,8 @@ version, to allow any affected users to pin to a previous minor version.
 
 ```rust
 use std::io::prelude::*;
-use flate2::Compression;
-use flate2::write::ZlibEncoder;
+use ai_flate2::Compression;
+use ai_flate2::write::ZlibEncoder;
 
 fn main() {
     let mut e = ZlibEncoder::new(Vec::new(), Compression::default());
@@ -55,7 +55,7 @@ fn main() {
 
 ```rust,no_run
 use std::io::prelude::*;
-use flate2::read::GzDecoder;
+use ai_flate2::read::GzDecoder;
 
 fn main() {
     let mut d = GzDecoder::new("...".as_bytes());
@@ -74,7 +74,7 @@ implementation at the cost of some `unsafe`, you can use `zlib-rs`:
 
 ```toml
 [dependencies]
-flate2 = { version = "1.0.17", features = ["zlib-rs"], default-features = false }
+ai-flate2 = { version = "1.0.17", features = ["zlib-rs"], default-features = false }
 ```
 
 ### C backends
@@ -84,7 +84,7 @@ the zlib-ng C library can be slightly faster in certain cases:
 
 ```toml
 [dependencies]
-flate2 = { version = "1.0.17", features = ["zlib-ng"], default-features = false }
+ai-flate2 = { version = "1.0.17", features = ["zlib-ng"], default-features = false }
 ```
 
 Note that the `"zlib-ng"` feature works even if some other part of your crate
@@ -96,7 +96,7 @@ for Rust code as well:
 
 ```toml
 [dependencies]
-flate2 = { version = "1.0.17", features = ["zlib"], default-features = false }
+ai-flate2 = { version = "1.0.17", features = ["zlib"], default-features = false }
 ```
 
 Or, if you have C or Rust code that depends on zlib and you want to use zlib-ng
@@ -104,7 +104,7 @@ via libz-sys in zlib-compat mode, use:
 
 ```toml
 [dependencies]
-flate2 = { version = "1.0.17", features = ["zlib-ng-compat"], default-features = false }
+ai-flate2 = { version = "1.0.17", features = ["zlib-ng-compat"], default-features = false }
 ```
 
 Note that when using the `"zlib-ng-compat"` feature, if any crate in your

@@ -1,8 +1,8 @@
 #![no_main]
 use libfuzzer_sys::fuzz_target;
-use flate2::write::GzEncoder;
-use flate2::Compression;
-use flate2::read::GzDecoder;
+use ai_flate2::write::GzEncoder;
+use ai_flate2::Compression;
+use ai_flate2::read::GzDecoder;
 use std::io::prelude::*;
 
 

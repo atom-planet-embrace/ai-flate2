@@ -1,6 +1,6 @@
 //! Validate that certain feature-gated functionality is still available.
 #[cfg(feature = "any_zlib")]
-use flate2::{Compress, Compression, Decompress, FlushCompress, FlushDecompress};
+use ai_flate2::{Compress, Compression, Decompress, FlushCompress, FlushDecompress};
 
 // Unsupported for `miniz_oxide`.
 #[cfg(feature = "any_zlib")]

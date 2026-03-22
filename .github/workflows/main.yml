@@ -33,7 +33,7 @@ jobs:
       run: rustup update ${{ matrix.rust }} --no-self-update && rustup default ${{ matrix.rust }}
       shell: bash
     - run: cargo build
-    - run: rustdoc --test README.md -L target/debug/deps --extern flate2=target/debug/libflate2.rlib --edition=2018
+    - run: rustdoc --test README.md -L target/debug/deps --extern ai_flate2=target/debug/libai_flate2.rlib --edition=2018
     - run: cargo test
     - run: cargo test --features zlib
     - run: cargo test --features zlib --no-default-features
@@ -118,7 +118,7 @@ jobs:
       - run: cargo build --features zlib-ng --no-default-features
       - run: cargo build --features cloudflare_zlib --no-default-features
 
-  # Minimum Rust compiler to build `flate2` with no optional features
+  # Minimum Rust compiler to build `ai-flate2` with no optional features
   minimum-build:
     name: Minimum Rust compiler
     runs-on: ubuntu-latest

@@ -60,7 +60,7 @@
 //!
 //! The [`mod@read`] implementations conveniently wrap a `Read` type in a `BufRead` implementation.
 //! However, the `read` implementations may
-//! [read past the end of the input data](https://github.com/rust-lang/flate2-rs/issues/338),
+//! [read past the end of the input data](https://github.com/atom-planet-embrace/ai-flate2/issues/338),
 //! making the `Read` type useless for subsequent reads of the input. If you need to re-use the
 //! `Read` type, wrap it in a [`std::io::BufReader`], use the `bufread` implementations,
 //! and perform subsequent reads on the `BufReader`.
@@ -79,7 +79,7 @@
 //! {
 //!     let mut stream = std::pin::pin!(stream);
 //!     let mut w = Vec::<u8>::new();
-//!     let mut decoder = flate2::write::GzDecoder::new(w);
+//!     let mut decoder = ai_flate2::write::GzDecoder::new(w);
 //!     while let Some(input) = stream.next().await {
 //!         decoder.write_all(input.as_ref())?;
 //!     }
@@ -116,7 +116,7 @@
 //! [`GzDecoder`]: bufread::GzDecoder
 //! [`MultiGzDecoder`]: bufread::MultiGzDecoder
 #![cfg_attr(not(any(feature = "std", test)), no_std)]
-#![doc(html_root_url = "https://docs.rs/flate2/0.2")]
+#![doc(html_root_url = "https://docs.rs/ai-flate2/0.2")]
 #![deny(missing_docs)]
 #![deny(missing_debug_implementations)]
 #![allow(trivial_numeric_casts)]
@@ -132,9 +132,9 @@ extern crate alloc;
 compile_error!("You need to choose a zlib backend");
 
 pub use crate::crc::{Crc, CrcReader, CrcWriter};
+pub use crate::gz::FromUnixTimestamp;
 pub use crate::gz::GzBuilder;
 pub use crate::gz::GzHeader;
-pub use crate::gz::FromUnixTimestamp;
 pub use crate::mem::{Compress, CompressError, Decompress, DecompressError, Status};
 pub use crate::mem::{FlushCompress, FlushDecompress};
 

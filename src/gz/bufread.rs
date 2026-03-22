@@ -31,8 +31,8 @@ fn copy(into: &mut [u8], from: &[u8], pos: &mut usize) -> usize {
 #[cfg_attr(feature = "std", doc = "```")]
 /// use std::io::prelude::*;
 /// use std::io;
-/// use flate2::Compression;
-/// use flate2::bufread::GzEncoder;
+/// use ai_flate2::Compression;
+/// use ai_flate2::bufread::GzEncoder;
 /// use std::fs::File;
 /// use std::io::BufReader;
 ///
@@ -189,9 +189,9 @@ impl<R: BufRead + Write> Write for GzEncoder<R> {
 #[cfg_attr(feature = "std", doc = "```")]
 /// use std::io::prelude::*;
 /// use std::io;
-/// # use flate2::Compression;
-/// # use flate2::write::GzEncoder;
-/// use flate2::bufread::GzDecoder;
+/// # use ai_flate2::Compression;
+/// # use ai_flate2::write::GzEncoder;
+/// use ai_flate2::bufread::GzDecoder;
 ///
 /// # fn main() {
 /// #   let mut e = GzEncoder::new(Vec::new(), Compression::default());
@@ -393,9 +393,9 @@ impl<R: BufRead + Write> Write for GzDecoder<R> {
 #[cfg_attr(feature = "std", doc = "```")]
 /// use std::io::prelude::*;
 /// use std::io;
-/// # use flate2::Compression;
-/// # use flate2::write::GzEncoder;
-/// use flate2::bufread::MultiGzDecoder;
+/// # use ai_flate2::Compression;
+/// # use ai_flate2::write::GzEncoder;
+/// use ai_flate2::bufread::MultiGzDecoder;
 ///
 /// # fn main() {
 /// #   let mut e = GzEncoder::new(Vec::new(), Compression::default());

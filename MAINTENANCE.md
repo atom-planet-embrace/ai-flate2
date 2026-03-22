@@ -3,7 +3,7 @@ This document explains how to perform the project's maintenance tasks.
 ### Repository Configuration
 
 Some repository settings, including branch protection and required approvals, are managed in the
-[Rust team repo](https://github.com/rust-lang/team/blob/master/repos/rust-lang/flate2-rs.toml).
+[Rust team repo](https://github.com/rust-lang/team/blob/master/repos/atom-planet-embrace/ai-flate2.toml).
 See the [repository schema](https://github.com/rust-lang/team/blob/aaa8039a2420a07cab9bbaca3885b3ad95a256a7/docs/toml-schema.md?plain=1#L248)
 for supported directives.
 
@@ -12,7 +12,7 @@ for supported directives.
 #### Artifacts
 
 * a tag of the version number
-* a new [crate version](https://crates.io/crates/flate2/versions)
+* a new [crate version](https://crates.io/crates/ai-flate2/versions)
 
 #### Process
 

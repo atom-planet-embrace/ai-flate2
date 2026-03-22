@@ -1,5 +1,5 @@
-use flate2::bufread::DeflateEncoder;
-use flate2::Compression;
+use ai_flate2::bufread::DeflateEncoder;
+use ai_flate2::Compression;
 use std::fs::File;
 use std::io;
 use std::io::prelude::*;

@@ -16,8 +16,8 @@ use crate::{Compress, Decompress};
 #[cfg_attr(not(feature = "std"), doc = "```ignore")]
 #[cfg_attr(feature = "std", doc = "```")]
 /// use std::io::prelude::*;
-/// use flate2::Compression;
-/// use flate2::write::ZlibEncoder;
+/// use ai_flate2::Compression;
+/// use ai_flate2::write::ZlibEncoder;
 ///
 /// // Vec<u8> implements Write, assigning the compressed bytes of sample string
 ///
@@ -193,9 +193,9 @@ impl<W: Read + Write> Read for ZlibEncoder<W> {
 #[cfg_attr(feature = "std", doc = "```")]
 /// use std::io::prelude::*;
 /// use std::io;
-/// # use flate2::Compression;
-/// # use flate2::write::ZlibEncoder;
-/// use flate2::write::ZlibDecoder;
+/// # use ai_flate2::Compression;
+/// # use ai_flate2::write::ZlibEncoder;
+/// use ai_flate2::write::ZlibDecoder;
 ///
 /// # fn main() {
 /// #    let mut e = ZlibEncoder::new(Vec::new(), Compression::default());

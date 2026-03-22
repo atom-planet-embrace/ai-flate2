@@ -1,5 +1,5 @@
-use flate2::read::GzDecoder;
-use flate2::read::MultiGzDecoder;
+use ai_flate2::read::GzDecoder;
+use ai_flate2::read::MultiGzDecoder;
 use std::fs::File;
 use std::io::prelude::*;
 use std::io::{self, BufReader};

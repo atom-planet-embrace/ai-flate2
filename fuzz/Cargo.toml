@@ -1,6 +1,6 @@
 
 [package]
-name = "flate2-fuzz"
+name = "ai-flate2-fuzz"
 version = "0.0.0"
 authors = ["Automatically generated"]
 publish = false
@@ -11,7 +11,7 @@ cargo-fuzz = true
 
 [dependencies]
 libfuzzer-sys = "0.4"
-flate2 = { path = ".." }
+ai-flate2 = { path = ".." }
 
 # Prevent this from interfering with workspaces
 [workspace]

@@ -19,8 +19,8 @@ use crate::{Compress, Decompress};
 #[cfg_attr(not(feature = "std"), doc = "```ignore")]
 #[cfg_attr(feature = "std", doc = "```")]
 /// use std::io::prelude::*;
-/// use flate2::Compression;
-/// use flate2::bufread::ZlibEncoder;
+/// use ai_flate2::Compression;
+/// use ai_flate2::bufread::ZlibEncoder;
 /// use std::fs::File;
 /// use std::io::BufReader;
 ///
@@ -148,9 +148,9 @@ impl<R: BufRead + Write> Write for ZlibEncoder<R> {
 #[cfg_attr(feature = "std", doc = "```")]
 /// use std::io::prelude::*;
 /// use std::io;
-/// # use flate2::Compression;
-/// # use flate2::write::ZlibEncoder;
-/// use flate2::bufread::ZlibDecoder;
+/// # use ai_flate2::Compression;
+/// # use ai_flate2::write::ZlibEncoder;
+/// use ai_flate2::bufread::ZlibDecoder;
 ///
 /// # fn main() {
 /// # let mut e = ZlibEncoder::new(Vec::new(), Compression::default());

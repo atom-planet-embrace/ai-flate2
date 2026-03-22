@@ -1,4 +1,4 @@
-use flate2::bufread;
+use ai_flate2::bufread;
 use std::env::args;
 use std::fs::File;
 use std::io::copy;

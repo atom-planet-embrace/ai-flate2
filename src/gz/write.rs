@@ -21,8 +21,8 @@ use crate::{Compress, Compression, Decompress, Status};
 #[cfg_attr(not(feature = "std"), doc = "```ignore")]
 #[cfg_attr(feature = "std", doc = "```")]
 /// use std::io::prelude::*;
-/// use flate2::Compression;
-/// use flate2::write::GzEncoder;
+/// use ai_flate2::Compression;
+/// use ai_flate2::write::GzEncoder;
 ///
 /// // Vec<u8> implements Write to print the compressed bytes of sample string
 /// # fn main() {
@@ -191,8 +191,8 @@ impl<W: Write> Drop for GzEncoder<W> {
 #[cfg_attr(feature = "std", doc = "```")]
 /// use std::io::prelude::*;
 /// use std::io;
-/// use flate2::Compression;
-/// use flate2::write::{GzEncoder, GzDecoder};
+/// use ai_flate2::Compression;
+/// use ai_flate2::write::{GzEncoder, GzDecoder};
 ///
 /// # fn main() {
 /// #    let mut e = GzEncoder::new(Vec::new(), Compression::default());

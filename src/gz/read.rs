@@ -19,8 +19,8 @@ use crate::Compression;
 #[cfg_attr(feature = "std", doc = "```")]
 /// use std::io::prelude::*;
 /// use std::io;
-/// use flate2::Compression;
-/// use flate2::read::GzEncoder;
+/// use ai_flate2::Compression;
+/// use ai_flate2::read::GzEncoder;
 ///
 /// // Return a vector containing the GZ compressed version of hello world
 ///
@@ -113,9 +113,9 @@ impl<R: Read + Write> Write for GzEncoder<R> {
 #[cfg_attr(feature = "std", doc = "```")]
 /// use std::io::prelude::*;
 /// use std::io;
-/// # use flate2::Compression;
-/// # use flate2::write::GzEncoder;
-/// use flate2::read::GzDecoder;
+/// # use ai_flate2::Compression;
+/// # use ai_flate2::write::GzEncoder;
+/// use ai_flate2::read::GzDecoder;
 ///
 /// # fn main() {
 /// #    let mut e = GzEncoder::new(Vec::new(), Compression::default());
@@ -236,9 +236,9 @@ impl<R: Read + Write> Write for GzDecoder<R> {
 #[cfg_attr(feature = "std", doc = "```")]
 /// use std::io::prelude::*;
 /// use std::io;
-/// # use flate2::Compression;
-/// # use flate2::write::GzEncoder;
-/// use flate2::read::MultiGzDecoder;
+/// # use ai_flate2::Compression;
+/// # use ai_flate2::write::GzEncoder;
+/// use ai_flate2::read::MultiGzDecoder;
 ///
 /// # fn main() {
 /// #    let mut e = GzEncoder::new(Vec::new(), Compression::default());

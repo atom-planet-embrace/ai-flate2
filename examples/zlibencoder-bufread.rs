@@ -1,5 +1,5 @@
-use flate2::bufread::ZlibEncoder;
-use flate2::Compression;
+use ai_flate2::bufread::ZlibEncoder;
+use ai_flate2::Compression;
 use std::fs::File;
 use std::io;
 use std::io::prelude::*;
