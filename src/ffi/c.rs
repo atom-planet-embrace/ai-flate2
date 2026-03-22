@@ -1,9 +1,9 @@
 //! Implementation for C backends.
 use alloc::boxed::Box;
+use core::ffi::{c_int, c_uint};
 use core::fmt;
 use core::marker;
 use core::mem::MaybeUninit;
-use core::ffi::{c_int, c_uint};
 use core::ptr;
 
 use super::*;
@@ -72,7 +72,7 @@ impl Drop for StreamWrapper {
 mod allocator {
     use super::*;
 
-    use alloc::alloc::{self, Layout};
+    use crate::alloc::alloc::{self, Layout};
     use core::convert::TryFrom;
     use core::ffi::c_void;
 
@@ -419,8 +419,8 @@ pub use self::c_backend::*;
 #[allow(bad_style)]
 #[allow(unused_imports)]
 mod c_backend {
-    use core::mem;
     use core::ffi::{c_char, c_int};
+    use core::mem;
 
     #[cfg(feature = "zlib-ng")]
     use libz_ng_sys as libz;

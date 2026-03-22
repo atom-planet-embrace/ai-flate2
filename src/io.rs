@@ -7,5 +7,5 @@ pub use no_std_io::io::*;
 
 /// Re-export of the I/O prelude traits.
 pub mod prelude {
-    pub use no_std_io::io::{BufRead, Read, Seek, Write};
+    pub use no_std_io::io::{BufRead, Read, Write};
 }
