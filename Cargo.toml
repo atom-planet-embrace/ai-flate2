@@ -41,7 +41,7 @@ quickcheck = { version = "1.0", default-features = false }
 default = ["rust_backend"]
 
 ## Enables `std::io` traits. When disabled, uses `no_std_io` for I/O traits.
-std = ["zlib-rs?/std", "crc32fast?/std"]
+std = ["zlib-rs?/std", "crc32fast?/std", "no_std_io/std"]
 
 simd = ["miniz_oxide?/simd", "crc32fast?/std"]
 
