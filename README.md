@@ -1,4 +1,4 @@
-This is a fork of the [flate2](https://crates.io/crates/flate2) crate.
+This is a fork of the [flate2](https://crates.io/crates/flate2) crate. The git repository is located at https://github.com/rust-lang/flate2-rs.
 
 # ai-flate2
 
